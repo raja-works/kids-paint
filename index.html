@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="A fun and colorful paint app for kids — draw, color, and create with brushes, pencils, and magic fill!">
+  <title>Kids Paint 🎨 — Draw, Color & Create!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════ SPLASH SCREEN ═══════════════════ -->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-content">
+      <div class="splash-emoji">🎨</div>
+      <h1 class="splash-title">Kids Paint</h1>
+      <p class="splash-subtitle">Draw, Color & Create!</p>
+      <button id="btn-start" class="splash-btn">
+        <span class="splash-btn-icon">🖌️</span>
+        Let's Paint!
+      </button>
+    </div>
+    <div class="splash-paint-drips">
+      <div class="drip drip-1"></div>
+      <div class="drip drip-2"></div>
+      <div class="drip drip-3"></div>
+      <div class="drip drip-4"></div>
+      <div class="drip drip-5"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ MAIN APP ═══════════════════ -->
+  <div id="app" class="app hidden">
+
+    <!-- ─── Top Bar ─── -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <span class="app-logo">🎨</span>
+        <h1 class="app-title">Kids Paint</h1>
+      </div>
+      <div class="top-bar-right">
+        <button id="btn-undo" class="top-btn" title="Undo" aria-label="Undo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h13a4 4 0 0 1 0 8H7"/><path d="M3 10l4-4"/><path d="M3 10l4 4"/></svg>
+        </button>
+        <button id="btn-redo" class="top-btn" title="Redo" aria-label="Redo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10H8a4 4 0 0 0 0 8h9"/><path d="M21 10l-4-4"/><path d="M21 10l-4 4"/></svg>
+        </button>
+        <div class="top-divider"></div>
+        <button id="btn-sound" class="top-btn active" title="Toggle Sound" aria-label="Toggle Sound">
+          <svg class="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <svg class="icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <button id="btn-new" class="top-btn" title="New Canvas" aria-label="New Canvas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </button>
+        <button id="btn-save" class="top-btn" title="Save Drawing" aria-label="Save Drawing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17,21 17,13 7,13 7,21"/><polyline points="7,3 7,8 15,8"/></svg>
+        </button>
+        <button id="btn-gallery" class="top-btn" title="Open Gallery" aria-label="Open Gallery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </button>
+        <button id="btn-download" class="top-btn" title="Download Image" aria-label="Download Image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ─── Sidebar Toolbar ─── -->
+    <aside class="toolbar" id="toolbar">
+
+      <!-- Tools Section -->
+      <div class="tool-section">
+        <div class="tool-section-label">Tools</div>
+        <div class="tool-grid">
+          <button class="tool-btn active" data-tool="pen" title="Pen" aria-label="Pen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="pencil" title="Pencil" aria-label="Pencil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="2" x2="22" y2="6"/><path d="M7.5 20.5L19 9l-4-4L3.5 16.5 2 22z"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="brush" title="Paint Brush" aria-label="Paint Brush">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63a2.12 2.12 0 0 1 3 3L14 13l-4 1 1-4 7.37-7.37z"/><path d="M9 14.5A3.5 3.5 0 0 0 5.5 18c-1.2 0-2.8.5-3.5 2 .5-2.5 2.1-4 4-4a3.5 3.5 0 0 0 3-1.5z"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="fill" title="Fill Bucket" aria-label="Fill Bucket">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 18.5l9-9 5 5-9 9z"/><path d="M7 14l3-3"/><path d="M19 11c1.5 1.5 2 3.5 0 5.5s-4 0-5.5-1.5"/><line x1="2" y1="2" x2="8" y2="8"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="eraser" title="Eraser" aria-label="Eraser">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H7L3 16l9-9 8 8-4 4z"/><path d="M6 11l8 8"/><line x1="18" y1="20" x2="22" y2="20"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="upload" title="Upload Image" aria-label="Upload Image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Brush Size -->
+      <div class="tool-section">
+        <div class="tool-section-label">Size</div>
+        <div class="size-control">
+          <div class="size-preview-wrap">
+            <div id="size-preview" class="size-preview"></div>
+          </div>
+          <input type="range" id="brush-size" class="brush-size-slider" min="2" max="50" value="8">
+        </div>
+      </div>
+
+      <!-- Color Palette -->
+      <div class="tool-section">
+        <div class="tool-section-label">Colors</div>
+        <div class="color-palette" id="color-palette">
+          <button class="color-swatch active" data-color="#1a1a2e" style="--swatch-color: #1a1a2e" title="Black" aria-label="Black"></button>
+          <button class="color-swatch" data-color="#e74c3c" style="--swatch-color: #e74c3c" title="Red" aria-label="Red"></button>
+          <button class="color-swatch" data-color="#e67e22" style="--swatch-color: #e67e22" title="Orange" aria-label="Orange"></button>
+          <button class="color-swatch" data-color="#f1c40f" style="--swatch-color: #f1c40f" title="Yellow" aria-label="Yellow"></button>
+          <button class="color-swatch" data-color="#2ecc71" style="--swatch-color: #2ecc71" title="Green" aria-label="Green"></button>
+          <button class="color-swatch" data-color="#1abc9c" style="--swatch-color: #1abc9c" title="Teal" aria-label="Teal"></button>
+          <button class="color-swatch" data-color="#3498db" style="--swatch-color: #3498db" title="Blue" aria-label="Blue"></button>
+          <button class="color-swatch" data-color="#9b59b6" style="--swatch-color: #9b59b6" title="Purple" aria-label="Purple"></button>
+          <button class="color-swatch" data-color="#e91e8e" style="--swatch-color: #e91e8e" title="Pink" aria-label="Pink"></button>
+          <button class="color-swatch" data-color="#795548" style="--swatch-color: #795548" title="Brown" aria-label="Brown"></button>
+          <button class="color-swatch" data-color="#ecf0f1" style="--swatch-color: #ecf0f1" title="White" aria-label="White"></button>
+          <button class="color-swatch" data-color="#636e72" style="--swatch-color: #636e72" title="Gray" aria-label="Gray"></button>
+        </div>
+        <div class="custom-color-wrap">
+          <input type="color" id="custom-color" class="custom-color-input" value="#e74c3c" title="Pick custom color" aria-label="Custom color picker">
+          <span class="custom-color-label">Custom</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── Canvas Area ─── -->
+    <main class="canvas-area" id="canvas-area">
+      <div class="canvas-wrapper" id="canvas-wrapper">
+        <canvas id="drawing-canvas"></canvas>
+      </div>
+    </main>
+
+    <!-- ═══════════════════ GALLERY MODAL ═══════════════════ -->
+    <div id="gallery-modal" class="modal-overlay hidden">
+      <div class="modal gallery-modal">
+        <div class="modal-header">
+          <h2>🖼️ My Gallery</h2>
+          <button id="btn-close-gallery" class="modal-close" aria-label="Close gallery">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="gallery-grid" class="gallery-grid">
+            <!-- Dynamically populated -->
+          </div>
+          <div id="gallery-empty" class="gallery-empty hidden">
+            <span class="gallery-empty-icon">🎨</span>
+            <p>No saved paintings yet!</p>
+            <p class="gallery-empty-hint">Paint something amazing, then tap Save!</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-load-file" class="modal-btn secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            Open File
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ OUTLINE PROCESSOR MODAL ═══════════════════ -->
+    <div id="outline-modal" class="modal-overlay hidden">
+      <div class="modal outline-modal">
+        <div class="modal-header">
+          <h2>✨ Create Coloring Page</h2>
+          <button id="btn-close-outline" class="modal-close" aria-label="Close outline processor">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="outline-preview-wrap">
+            <canvas id="outline-preview-canvas" class="outline-preview-canvas"></canvas>
+            <div id="outline-loading" class="outline-loading hidden">
+              <div class="spinner"></div>
+              <p>Creating outlines...</p>
+            </div>
+          </div>
+          <div class="outline-controls">
+            <label class="outline-slider-label">
+              Detail Level
+              <input type="range" id="outline-sensitivity" class="outline-slider" min="0" max="100" value="50">
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-cancel-outline" class="modal-btn secondary">Cancel</button>
+          <button id="btn-use-outline" class="modal-btn primary">Use This! 🎉</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ CONFIRM NEW CANVAS MODAL ═══════════════════ -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+      <div class="modal confirm-modal">
+        <div class="modal-header">
+          <h2>🗑️ New Canvas?</h2>
+        </div>
+        <div class="modal-body">
+          <p>Start a fresh new painting? Your current drawing will be lost unless you save it first!</p>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-cancel-new" class="modal-btn secondary">Keep Drawing</button>
+          <button id="btn-confirm-new" class="modal-btn danger">Clear & Start New</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hidden file inputs -->
+  <input type="file" id="file-upload" accept="image/*" hidden>
+  <input type="file" id="file-open" accept="image/*" hidden>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
